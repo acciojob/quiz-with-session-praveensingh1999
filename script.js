@@ -13,10 +13,10 @@ const questions = [
     choices: ["Everest", "Kilimanjaro", "Denali", "Matterhorn"],
     answer: "Everest",
   },
-  {
+  {  
     question: "What is the largest country by area?",
     choices: ["Russia", "China", "Canada", "United States"],
-    answer: "Russia",
+    answer: "Russia", 
   },
   {
     question: "Which is the largest planet in our solar system?",
@@ -29,13 +29,18 @@ const questions = [
     answer: "Ottawa",
   },
 ];
+const questionsElement = document.querySelector("#questions");
 
 // Display the quiz questions and choices
-function renderQuestions() {
+function renderQuestions() { 
+	let userAnswers=[];
+	
   for (let i = 0; i < questions.length; i++) {
+	  
     const question = questions[i];
     const questionElement = document.createElement("div");
     const questionText = document.createTextNode(question.question);
+	  console.log(questionText);
     questionElement.appendChild(questionText);
     for (let j = 0; j < question.choices.length; j++) {
       const choice = question.choices[j];
@@ -43,14 +48,33 @@ function renderQuestions() {
       choiceElement.setAttribute("type", "radio");
       choiceElement.setAttribute("name", `question-${i}`);
       choiceElement.setAttribute("value", choice);
+		choiceElement.addEventListener("change", () => {
+        userAnswers[i] = choice;
+      });
       if (userAnswers[i] === choice) {
         choiceElement.setAttribute("checked", true);
       }
       const choiceText = document.createTextNode(choice);
       questionElement.appendChild(choiceElement);
       questionElement.appendChild(choiceText);
+		
     }
+	  
     questionsElement.appendChild(questionElement);
+	  
+	 
   }
+	console.log(userAnswers);
+	let score=0;
+	for(let i=0;i<questions.length;i++){
+		let daa = questions[i].answer;
+		console.log(daa);
+		for(let j=0;j<userAnswers.length;j++){
+			if(daa == userAnswers[j]){
+				score++;
+			}
+		}
+	}
+	console.log(score);
 }
 renderQuestions();
