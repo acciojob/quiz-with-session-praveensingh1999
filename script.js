@@ -54,6 +54,7 @@ function renderQuestions() {
       // Restore saved progress
       if (savedProgress[i] === choice) {
         choiceInput.checked = true;
+        choiceInput.setAttribute("checked", "true"); // Cypress fix
       }
 
       // Save progress on change
